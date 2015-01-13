@@ -1,12 +1,12 @@
 `timescale 1ns / 1ps
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-// Author      : Gabe Harms
-// Create Date : 03/20/12	
-// Module Name : Sign Extention    
-// Project Name: CPU_Datapath
+//					
+// Engineer: Gabe Harms
+// Module Name:  instruction_memory.v 
+// Description:	Memory containing all of the instructions
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 module instruction_memory
 
@@ -14,10 +14,6 @@ module instruction_memory
 	address,
 	instruction
 );
-
-    //--------------------------
-	// Parameters
-	//--------------------------	
 	
     //--------------------------
 	// Input Ports
@@ -31,36 +27,11 @@ module instruction_memory
     // < Enter Output Ports  >	
     output 	reg [31:0] 	instruction;
 		
-    //--------------------------
-    // Bidirectional Ports
-    //--------------------------
-    // < Enter Bidirectional Ports in Alphabetical Order >
-    // None
-      
-    ///////////////////////////////////////////////////////////////////
-    // Begin Design
-    ///////////////////////////////////////////////////////////////////
-    //-------------------------------------------------
-    // Signal Declarations: local params
-    //-------------------------------------------------
-   
     //-------------------------------------------------
     // Signal Declarations: reg
     //-------------------------------------------------    
     reg	[31:0] instruction_memory	[255:0];
 	
-    //-------------------------------------------------
-    // Signal Declarations: wire
-    //-------------------------------------------------
-		
-	//---------------------------------------------------------------
-	// Instantiations
-	//---------------------------------------------------------------
-	// None
-
-	//---------------------------------------------------------------
-	// Combinatorial Logic
-	//---------------------------------------------------------------
 	initial
 	begin
 		$readmemh("program.mips",instruction_memory);

@@ -1,10 +1,9 @@
 `timescale 1ns / 1ps
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-// Author      : Gabe Harms
-// Create Date : 03/20/12	
-// Module Name : Sign Extention    
-// Project Name: CPU_Datapath
+//					
+// Engineer: Gabe Harms
+// Module Name:  control_unit.v 
+// Description:	Sends out control signals to other modules, based on the input instruction
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -20,10 +19,6 @@ module control_unit
 	data_mem_wren,
 	pc_control
 );
-
-    //--------------------------
-	// Parameters
-	//--------------------------	
 	
     //--------------------------
 	// Input Ports
@@ -43,18 +38,6 @@ module control_unit
 	output	reg				alu_mux_select;
 	output	reg	[3:0]		alu_control;
 	output	reg	[2:0]		pc_control;
-	
-
-    ///////////////////////////////////////////////////////////////////
-    // Begin Design
-    ///////////////////////////////////////////////////////////////////
-    //-------------------------------------------------
-    // Signal Declarations: local params
-    //-------------------------------------------------
-   
-    //-------------------------------------------------
-    // Signal Declarations: reg
-    //-------------------------------------------------    
     
     //-------------------------------------------------
     // Signal Declarations: wire
@@ -68,10 +51,6 @@ module control_unit
     wire     [  4:0]    rd;   		
     wire     [  4:0]    shamt;		
     wire     [  5:0]    funct;		
-	//---------------------------------------------------------------
-	// Instantiations
-	//---------------------------------------------------------------
-	// None
 
 	//---------------------------------------------------------------
 	// Combinatorial Logic
@@ -105,11 +84,7 @@ module control_unit
 	assign rt   		= (type <  3'b100) ? instruction_in[20:16] :  5'b0;
 	assign rd   		= (type == 3'b001) ? instruction_in[15:11] :  5'b0;
 	assign shamt		= (type == 3'b001) ? instruction_in[10: 6] :  5'b0;
-	assign funct		= (type == 3'b001) ? instruction_in[ 5: 0] :  6'b0;
-				
-	
-	//NEVER USED ALU_ZERO INPUTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-	
+	assign funct		= (type == 3'b001) ? instruction_in[ 5: 0] :  6'b0;	
 	
     always @(instruction_in)
     begin

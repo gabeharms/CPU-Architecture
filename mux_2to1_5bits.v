@@ -2,38 +2,38 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //					
 // Engineer: Gabe Harms
-// Module Name:  sign_extension.v 
-// Description:	Extends input from 16 bits to 32 bits while keeping the sign
+// Module Name:  mux_2to1_5bits.v 
+// Description:	5 bit 2 to 1 mux
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-module sign_extension
+module mux_2to1_5bits
 
 (
-    in,	//16-bit input
-	out	//32-bit sign extended output
+    in0,	//input 0
+	in1,	//input 1
+	out,	//output
+	sel	//select
 );
 
-	parameter INPUT_DWIDTH = 16;
-	parameter OUTPUT_DWIDTH = 32;
+	parameter DWIDTH = 5;
     //--------------------------
 	// Input Ports
 	//--------------------------
 	// < Enter Input Ports  >
-    input 		[INPUT_DWIDTH-1:0]	in;
+    input 		[DWIDTH-1:0]		in0;
+	input 		[DWIDTH-1:0]		in1;
+	input 									sel;
 	
     //--------------------------
     // Output Ports
     //--------------------------
     // < Enter Output Ports  >	
-    output 	[OUTPUT_DWIDTH-1:0] 	out; 
+    output 	[DWIDTH-1:0] 		out; 
 		
-	localparam SIGN_BIT_LOCATION = INPUT_DWIDTH-1;
-	localparam SIGN_BIT_REPLICATION_COUNT = OUTPUT_DWIDTH - INPUT_DWIDTH;
-	
- 
-	assign out = {{SIGN_BIT_REPLICATION_COUNT{in[SIGN_BIT_LOCATION]}},in[INPUT_DWIDTH-1:0]};
-	
+  
+	assign out = (sel == 0) ? in0 : in1;
+    
  endmodule  
 
 
